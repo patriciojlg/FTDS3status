@@ -1,0 +1,19 @@
+{
+    "command": "add-batch-status",
+    "batch-id": "123123aasdasd",
+    "status": "pending",
+    "payload": [
+        {
+            "rut": "12345678-9"
+        },
+        {
+            "rut": "12345678-9"
+        },
+        {
+            "rut": "12345678-9"
+        },
+        {
+            "rut": "12345678-9"
+        }
+    ]
+}
