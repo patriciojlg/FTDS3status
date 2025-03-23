@@ -9,10 +9,11 @@ import (
 func MockAddPendingTask(idBatch string, taskID string) (context.Context, models.Request) {
 	ctx := context.Background()
 	req := models.Request{
-		Command: settings.ADD_TASK_STATUS,
-		BatchID: idBatch,
-		TaskID:  taskID,
-		Status:  "pending",
+		Command:     settings.ADD_TASK_STATUS,
+		BatchID:     idBatch,
+		TaskID:      taskID,
+		Status:      "pending",
+		ServiceTask: "sec",
 		Payload: map[string]interface{}{
 			"rut": taskID,
 		},
@@ -23,10 +24,11 @@ func MockAddPendingTask(idBatch string, taskID string) (context.Context, models.
 func MockAddRunningTask(idBatch string, taskID string) (context.Context, models.Request) {
 	ctx := context.Background()
 	req := models.Request{
-		Command: settings.ADD_TASK_STATUS,
-		BatchID: idBatch,
-		TaskID:  taskID,
-		Status:  "running",
+		Command:     settings.ADD_TASK_STATUS,
+		BatchID:     idBatch,
+		TaskID:      taskID,
+		Status:      "running",
+		ServiceTask: "sec",
 		Payload: map[string]interface{}{
 			"rut": taskID,
 		},
@@ -37,10 +39,11 @@ func MockAddRunningTask(idBatch string, taskID string) (context.Context, models.
 func MockAddFailedTask(idBatch string, taskID string) (context.Context, models.Request) {
 	ctx := context.Background()
 	req := models.Request{
-		Command: settings.ADD_TASK_STATUS,
-		BatchID: idBatch,
-		TaskID:  taskID,
-		Status:  "failed",
+		Command:     settings.ADD_TASK_STATUS,
+		BatchID:     idBatch,
+		TaskID:      taskID,
+		Status:      "failed",
+		ServiceTask: "sec",
 		Payload: map[string]interface{}{
 			"error": "rut no encontrado",
 			"rut":   taskID,
@@ -52,10 +55,11 @@ func MockAddFailedTask(idBatch string, taskID string) (context.Context, models.R
 func MockAddCompletedTask(idBatch string, taskID string) (context.Context, models.Request) {
 	ctx := context.Background()
 	req := models.Request{
-		Command: settings.ADD_TASK_STATUS,
-		BatchID: idBatch,
-		TaskID:  taskID,
-		Status:  "completed",
+		Command:     settings.ADD_TASK_STATUS,
+		BatchID:     idBatch,
+		TaskID:      taskID,
+		Status:      "completed",
+		ServiceTask: "sec",
 		Payload: map[string]interface{}{
 			"rut":          taskID,
 			"certificados": []string{"Ingeniería", "SEC Clase D"},

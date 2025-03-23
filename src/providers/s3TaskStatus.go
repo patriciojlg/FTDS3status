@@ -26,7 +26,7 @@ func AddTaskCompletedStatus(req models.Request) error {
 // Reutilizable
 func writeTaskStatus(req models.Request, status string, withPayload bool) error {
 	timestamp := time.Now().UTC().Format(time.RFC3339)
-	filename := fmt.Sprintf("%s.json", timestamp)
+	filename := fmt.Sprintf("%s_%s.json", req.ServiceTask, timestamp)
 	s3Key := fmt.Sprintf("%s/%s/%s/%s/%s/%s/%s",
 		settings.SERVICE_NAME,
 		settings.ALL_BATCH_TAG,
