@@ -67,26 +67,38 @@ func choiceCommandsBatchsStatus(req models.Request) (models.Response, error) {
 
 // The task status updater is handled only by stepfunctions
 func choicheCommandTaskStatus(req models.Request) (models.Response, error) {
-	// Maneja status batch
 	switch req.Status {
 	case "pending":
-	//todo something
+		err := providers.AddTaskPendingStatus(req)
+		if err != nil {
+			return models.Response{Message: "error updating task pending status"}, err
+		}
+		return models.Response{Message: "task pending status updated"}, nil
+
 	case "running":
-		//todo something
+		err := providers.AddTaskRunningStatus(req)
+		if err != nil {
+			return models.Response{Message: "error updating task running status"}, err
+		}
+		return models.Response{Message: "task running status updated"}, nil
+
 	case "failed":
-		//todo another-thing
+		err := providers.AddTaskFailedStatus(req)
+		if err != nil {
+			return models.Response{Message: "error updating task failed status"}, err
+		}
+		return models.Response{Message: "task failed status updated"}, nil
+
 	case "completed":
-		//todo another-thing
-	case "success":
-		//todo another thing
+		err := providers.AddTaskCompletedStatus(req)
+		if err != nil {
+			return models.Response{Message: "error updating task completed status"}, err
+		}
+		return models.Response{Message: "task completed status updated"}, nil
+
 	default:
-		return models.Response{
-			Message: "Unknown status add-task-status: " + req.Status,
-		}, nil
+		return models.Response{Message: "invalid task status: " + req.Status}, nil
 	}
-	return models.Response{
-		Message: "Unknown status add-task-status: " + req.Status,
-	}, nil
 }
 
 func HandleRequest(ctx context.Context, req models.Request) (models.Response, error) {
