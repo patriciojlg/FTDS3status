@@ -2,6 +2,7 @@ package main
 
 import (
 	handlers "FTDS3Status/src/handlers"
+	mocks "FTDS3Status/src/mocks"
 	"FTDS3Status/src/models"
 	"FTDS3Status/src/settings"
 	"context"
@@ -75,8 +76,13 @@ func main() {
 	if _, exists := os.LookupEnv("AWS_LAMBDA_RUNTIME_API"); exists {
 		lambda.Start(handlers.HandleRequest)
 	} else {
-		ctxRunningStatus, reqMockRunning := mockAddCompletedBatch("600b5e67-89e4-4d34-86bb-dd3867257db3")
-
-		handlers.HandleRequest(ctxRunningStatus, reqMockRunning)
+		ctxRunningStatus, reqMocPendingTask := mocks.MockAddPendingTask("600b5e67-89e4-4d34-86bb-dd3867257db3", "15838946-0")
+		handlers.HandleRequest(ctxRunningStatus, reqMocPendingTask)
+		ctxRunningStatus, mockAddRunningTask := mocks.MockAddRunningTask("600b5e67-89e4-4d34-86bb-dd3867257db3", "15838946-0")
+		handlers.HandleRequest(ctxRunningStatus, mockAddRunningTask)
+		ctxRunningStatus, mockComplete := mocks.MockAddCompletedTask("600b5e67-89e4-4d34-86bb-dd3867257db3", "15838946-0")
+		handlers.HandleRequest(ctxRunningStatus, mockComplete)
+		ctxRunningStatus, mockFailed := mocks.MockAddFailedTask("600b5e67-89e4-4d34-86bb-dd3867257db3", "15838946-0")
+		handlers.HandleRequest(ctxRunningStatus, mockFailed)
 	}
 }
